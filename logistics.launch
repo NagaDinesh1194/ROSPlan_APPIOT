@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- ROSPlan -->
+	<include file="$(find rosplan_planning_system)/launch/interfaced_planning_system.launch" >
+		<arg name="domain_path"		value="$(find rosplan_demos)/common/logistics_domain_file.pddl" />
+		<arg name="problem_path"	value="$(find rosplan_demos)/common/logistics_problem_file.pddl" />
+	</include>
+
+	<!--Websocket interface-->
+
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" >
+		
+	</include> -->
+	<!--Actions Interface -->
+	
+	<!-- load action interface -->
+	<node name="rosplan_interface_load" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="load" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+	<!-- unload action interface -->
+	<node name="rosplan_interface_unload" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="unload" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+	<!-- xfer action interface -->
+	<node name="rosplan_interface_xfer" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="xfer" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+	<!-- move action interface -->
+	<node name="rosplan_interface_move" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="move" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+
+	<!-- rosplan client -->
+	<node name="rosplanClient" pkg="rosplan_planning_system" type="rosplan_client" respawn="false" output="screen">
+		
+	</node>
+    
+
+    
+</launch>

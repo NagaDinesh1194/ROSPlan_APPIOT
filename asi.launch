@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- ROSPlan -->
+	<include file="$(find rosplan_planning_system)/launch/interfaced_planning_system.launch" >
+		<arg name="domain_path"		value="$(find rosplan_demos)/common/asi_generated_domain.pddl" />
+		<arg name="problem_path"	value="$(find rosplan_demos)/common/asi_generated_problem.pddl" />
+	</include>
+
+	<!--Websocket interface-->
+
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" >
+		
+	</include> -->
+	<!--Actions Interface -->
+	
+	<!-- goto action interface -->
+	<node name="rosplan_interface_goto" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="goto" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+	<!-- take-image action interface -->
+	<node name="rosplan_interface_take_image" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="take-image" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+	<!-- take-thermal-image action interface -->
+	<node name="rosplan_interface_take_thermal_image" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="take-thermal-image" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+	<!-- take-signal-measurement action interface -->
+	<node name="rosplan_interface_take_signal_measurement" pkg="rosplan_planning_system" type="tutorialInterface" respawn="false" output="screen">
+		<param name="knowledge_base"		value="rosplan_knowledge_base" />
+		<param name="pddl_action_name"		value="take-signal-measurement" />
+		<param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+		<param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+	</node>
+
+
+	<!-- nags rosplan client -->
+	<node name="rosplanClient" pkg="rosplan_planning_system" type="nags_rosplan_client" respawn="false" output="screen">
+		
+	</node>
+    
+
+    
+</launch>
